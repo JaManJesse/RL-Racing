@@ -180,7 +180,7 @@ class RacingTask(BaseTask):
         return self.get_return_tuple()
 
     def reset_idx(self, env_ids):
-        ###########################
+        #commented segment is the code for random track creation.
         """target_segment_length = 2.5  # <-- choose segment length (meters)
 
         # Sample random starting positions
@@ -558,7 +558,7 @@ def compute_reward(
     # type: (Tensor, Tensor, Tensor, Tensor, Tensor, Dict[str, Tensor], int, Tensor, Tensor, Tensor, Tensor,Tensor, Tensor,Tensor, Tensor, float) -> Tuple[Tensor, Tensor]
 
     MULTIPLICATION_FACTOR_REWARD = 1.0 + (2.0) * curriculum_progress_fraction
-    
+    #code for progression along centerline method
     wp_idx = current_waypoint
     prev_wp_idx = torch.clamp(wp_idx - 1, min=0)
 
@@ -593,6 +593,8 @@ def compute_reward(
         progress > 0,
         parameter_dict["progress_reward"] * progress,
         torch.zeros_like(progress))
+
+    #This commented part is needed for the original navigation code, and is what racing random and racing static use.
     """dist = torch.norm(pos_error, dim=1)
     prev_dist_to_goal = torch.norm(prev_pos_error, dim=1)
     pos_reward = exponential_reward_function(
